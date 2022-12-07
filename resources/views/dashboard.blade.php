@@ -273,21 +273,31 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                @if(session()->has('message'))
+                  <div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  {{ session()->get('message') }}
+                </div>
+                @endif
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
+                    <th>Фотографія</th>
                     <th>ПІБ</th>
                     <th>Посада</th>
                     <th>Дата прийому на роботу</th>
                     <th>Номер телефона</th>
                     <th>Електронная пошта</th>
                     <th>Розмір заробітної плати</th>
-                    <th>Фотографія</th>
+                    <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
                  @foreach($employers as $employer)
                     <tr>
+                    <td>
+                      <img style="width: 60px; height: 60px" src="{{$employer->photo}}">
+                    </td>
                     <td>{{$employer->name}}</td>
                     <td>{{$employer->job}}
                     </td>
@@ -296,7 +306,7 @@
                     <td>{{$employer->email}}</td>
                     <td>{{$employer->amount_salary}}</td>
                     <td>
-                      <img style="width: 60px; height: 60px" src="{{$employer->photo}}">
+                      <a href="{{route('delete', $employer->id)}}"><ion-icon name="trash-outline"></ion-icon></a>
                     </td>
                   </tr>
                  @endforeach
@@ -335,6 +345,10 @@
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Icon -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 <!-- DataTables  & Plugins -->
 <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

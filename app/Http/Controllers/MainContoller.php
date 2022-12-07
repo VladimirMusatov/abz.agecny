@@ -15,4 +15,13 @@ class MainContoller extends Controller
         return view('dashboard', compact('employers'));
     }
 
+    public function delete($id){
+
+
+        Employer::where('id', $id)->delete();
+
+        return redirect()->back()->with('message', 'User deleted successfully');
+
+    }
+
 }
