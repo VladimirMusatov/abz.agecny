@@ -15,6 +15,6 @@ class EmlpoyersSeeder extends Seeder
      */
     public function run()
     {
-            Employer::factory()->count(20)->create();
+            Employer::factory()->count(5000)->create();
     }
 }
