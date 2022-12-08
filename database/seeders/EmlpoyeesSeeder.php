@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Employer;
+use App\Models\Employee;
 
-class EmlpoyersSeeder extends Seeder
+class EmlpoyeesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class EmlpoyersSeeder extends Seeder
      */
     public function run()
     {
-            Employer::factory()->count(5000)->create();
+            Employee::factory()->count(5000)->create();
     }
 }

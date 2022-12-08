@@ -20,6 +20,8 @@ Route::get('/dashboard',[MainContoller::class, 'index'])->middleware(['auth' , '
 Route::middleware('auth')->group(function () {
 
     Route::get('/delete/{id}', [MainContoller::class, 'delete'])->name('delete');
+    Route::get('/edit/{id}', [MainContoller::class, 'edit'])->name('edit');
+    Route::post('/update/{id}',[MainContoller::class,'update'])->name('update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

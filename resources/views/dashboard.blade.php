@@ -26,7 +26,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../../index3.html" class="nav-link">Home</a>
+        <a href="{{route('dashboard')}}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -293,20 +293,21 @@
                   </tr>
                   </thead>
                   <tbody>
-                 @foreach($employers as $employer)
+                 @foreach($employees as $employee)
                     <tr>
                     <td>
-                      <img style="width: 60px; height: 60px" src="{{$employer->photo}}">
+                        <img style="width: 60px; height: 60px" src="{{$employee->photo}}">
                     </td>
-                    <td>{{$employer->name}}</td>
-                    <td>{{$employer->job}}
+                    <td>{{$employee->name}}</td>
+                    <td>{{$employee->job}}
                     </td>
-                    <td>{{$employer->date_start_works}}</td>
-                    <td>{{$employer->phone}}</td>
-                    <td>{{$employer->email}}</td>
-                    <td>{{$employer->amount_salary}}</td>
+                    <td>{{$employee->date_start_works}}</td>
+                    <td>{{$employee->phone}}</td>
+                    <td>{{$employee->email}}</td>
+                    <td>{{$employee->amount_salary}}</td>
                     <td>
-                      <a href="{{route('delete', $employer->id)}}"><ion-icon name="trash-outline"></ion-icon></a>
+                      <a href="{{route('edit', $employee->id)}}"><ion-icon name="create-outline"></ion-icon></a>
+                      <a href="{{route('delete', $employee->id)}}"><ion-icon name="trash-outline"></ion-icon></a>
                     </td>
                   </tr>
                  @endforeach
