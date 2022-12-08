@@ -19,6 +19,7 @@ Route::get('/dashboard',[MainContoller::class, 'index'])->middleware(['auth' , '
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('/show/{id}', [MainContoller::class, 'show'])->name("show");
     Route::get('/delete/{id}', [MainContoller::class, 'delete'])->name('delete');
     Route::get('/edit/{id}', [MainContoller::class, 'edit'])->name('edit');
     Route::post('/update/{id}',[MainContoller::class,'update'])->name('update');

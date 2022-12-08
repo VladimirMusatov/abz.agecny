@@ -19,6 +19,16 @@ class MainContoller extends Controller
         return view('dashboard', compact('employees'));
     }
 
+    public function show($id){
+
+
+        $employee = Employee::where('id', $id)->first();
+
+        return view('show', compact('employee'));
+
+    }
+
+
     public function edit($id){
 
         $employee = Employee::where('id', $id)->first();
@@ -31,7 +41,7 @@ class MainContoller extends Controller
 
         $request->validate([
 
-            'name' => 'min:2|max:256|required',
+            'name' => ['min:2','max:256','required'],
             'email' => ['email','required',Rule::unique('employees')->ignore($id),],
             'amount_salary' => ['numeric','min:0','max:500'],
             'photo' => ['file', 'max:5000', 'image','dimensions:min_width=300,min_height=300'],

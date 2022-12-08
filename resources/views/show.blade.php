@@ -3,16 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | DataTables</title>
+  <title>AdminLTE 3 | General Form Elements</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -26,7 +22,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('dashboard')}}" class="nav-link">Employees</a>
+        <a href="{{route('dashboard')}}" class="nav-link">Home</a>
       </li>
     </ul>
 
@@ -163,11 +159,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Employees</h1>
+            <h1>Show {{$employee->name}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="#"  class="btn btn-block btn-default">Add employee</a>
+              <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+              <li class="breadcrumb-item active">Edit Employee</li>
             </ol>
           </div>
         </div>
@@ -178,61 +175,81 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <!-- /.card-header -->
-              <div class="card-body">
-                @if(session()->has('message'))
-                  <div class="alert alert-success alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  {{ session()->get('message') }}
-                </div>
-                @endif
-                <table id="example2" class="table table-bordered table-hover">
-                  <thead>
-                  <tr>
-                    <th>Фотографія</th>
-                    <th>ПІБ</th>
-                    <th>Посада</th>
-                    <th>Дата прийому на роботу</th>
-                    <th>Номер телефона</th>
-                    <th>Електронная пошта</th>
-                    <th>Розмір заробітної плати</th>
-                    <th>Action</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                 @foreach($employees as $employee)
-                    <tr>
-                    <td>
-                        <img style="width: 60px; height: 60px" src="{{$employee->photo}}">
-                    </td>
-                    <td><a href="{{route('show', $employee->id)}}">{{$employee->name}}</a></td>
-                    <td>{{$employee->job}}
-                    </td>
-                    <td>{{Carbon\Carbon::createFromFormat('Y-m-d',$employee->date_start_works)->format('d.m.Y')}}</td>
-                    <td>{{$employee->phone}}</td>
-                    <td>{{$employee->email}}</td>
-                    <td>{{$employee->amount_salary}}</td>
-                    <td>
-                      <a href="{{route('show', $employee->id)}}"><ion-icon name="eye-outline"></ion-icon></a>
-                      <a href="{{route('edit', $employee->id)}}"><ion-icon name="create-outline"></ion-icon></a>
-                      <a href="{{route('delete', $employee->id)}}"><ion-icon name="trash-outline"></ion-icon></a>
-                    </td>
-                  </tr>
-                 @endforeach
-                  </tfoot>
-                </table>
+          <!-- left column -->
+          <div class="col-md-6 " style="margin: 0 auto;">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Show {{$employee->name}}</h3>
               </div>
-              <!-- /.card-body -->
+              <!-- /.card-header -->
+              <!-- form start -->
+
+              <div style="margin: 25px auto;">
+                <img style="width: 300px" src="{{$employee->photo}}">
+              </div>
+              <form method="POST" enctype="multipart/form-data" action="{{route('update',$employee->id)}}">
+                @csrf
+                <div class="card-body">
+                  @if ($errors->any())
+                    <div class="alert alert-warning alert-dismissible">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <ul>
+                    @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                    @endforeach
+                    </ul>
+                    </div>
+                @endif
+                  <div class="form-group">
+                    <label>Email address</label>
+                    <div class="form-control">{{$employee->email}}</div>
+                  </div>
+                  <div class="form-group">
+                    <label>ПІБ</label>
+                    <div name="name" class="form-control">{{$employee->name}}</div>
+                  </div>
+                  <div class="form-group">
+                    <label>Розмір заробітної плати</label>
+                    <div class="input-group">
+                        <div class="form-control">{{$employee->amount_salary}}</div>
+                    </div>
+                  </div>
+                <!-- Date mm/dd/yyyy -->
+                <div class="form-group">
+                  <label>Дата прийому на роботу</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                    <div class="form-control">{{Carbon\Carbon::createFromFormat('Y-m-d',$employee->date_start_works)->format('d.m.Y')}}</div>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <!-- /.form group -->
+                <!-- phone mask -->
+                <div class="form-group">
+                  <label>Номер телефону</label>
+
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                    </div>
+                    <div class="form-control">{{$employee->phone}}</div>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <!-- /.card-body -->
+                </div>
+                <!-- /.form group -->
+              </form>
             </div>
             <!-- /.card -->
           </div>
-          <!-- /.col -->
+          <!--/.col (left) -->
         </div>
         <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
+      </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>
@@ -256,23 +273,17 @@
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Icon -->
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-<!-- DataTables  & Plugins -->
-<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../../plugins/jszip/jszip.min.js"></script>
-<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="../../plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="../../plugins/moment/moment.min.js"></script>
+<script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- bootstrap color picker -->
+<script src="../../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -280,22 +291,13 @@
 <!-- Page specific script -->
 <script>
   $(function () {
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
-<script>
 
-let item = document.getElementById('employees');
-item.classList.add('active');
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
 
+  })
 </script>
 </body>
 </html>
