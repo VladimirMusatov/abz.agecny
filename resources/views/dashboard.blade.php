@@ -28,9 +28,6 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('dashboard')}}" class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
     </ul>
 
     <!-- Right navbar links -->
@@ -268,9 +265,6 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">DataTable with minimal features & hover style</h3>
-              </div>
               <!-- /.card-header -->
               <div class="card-body">
                 @if(session()->has('message'))

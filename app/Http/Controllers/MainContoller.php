@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
 use App\Models\Employee;
+use Image;
 
 class MainContoller extends Controller
 {
@@ -33,6 +34,7 @@ class MainContoller extends Controller
             'name' => 'min:2|max:256|required',
             'email' => ['email','required',Rule::unique('employees')->ignore($id),],
             'amount_salary' => ['numeric','min:0','max:500'],
+            'photo' => ['file', 'max:5000', 'image','dimensions:min_width=300,min_height=300'],
 
         ]);
 
@@ -40,7 +42,11 @@ class MainContoller extends Controller
 
         $filename = $image->getClientOriginalName();
 
-        $image->move(Storage::path('/public/image/').'employees/',$filename);
+        $image = Image::make($image->getRealPath());
+
+        $image->crop(300, 300)->save(Storage::path('/public/image/').'employees/'.$filename, 80);
+
+        // $image->move(Storage::path('/public/image/').'employees/',$filename);
 
         $filename = Storage::url('image/employees/'.$filename);
 
