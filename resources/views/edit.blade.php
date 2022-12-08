@@ -916,7 +916,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-phone"></i></span>
                     </div>
-                    <input type="text" class="form-control" value="{{$employee->phone}}" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+                    <input type="text" class="form-control" value="{{$employee->phone}}" data-inputmask='"mask": "+380 (99) 999 99 99"' data-mask>
                   </div>
                   <!-- /.input group -->
                 </div>
