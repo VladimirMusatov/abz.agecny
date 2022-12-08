@@ -295,7 +295,7 @@
                     <td>{{$employee->name}}</td>
                     <td>{{$employee->job}}
                     </td>
-                    <td>{{$employee->date_start_works}}</td>
+                    <td>{{Carbon\Carbon::createFromFormat('Y-m-d',$employee->date_start_works)->format('d.m.Y')}}</td>
                     <td>{{$employee->phone}}</td>
                     <td>{{$employee->email}}</td>
                     <td>{{$employee->amount_salary}}</td>

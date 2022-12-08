@@ -40,22 +40,33 @@ class MainContoller extends Controller
 
         $image = $request->photo;
 
-        $filename = $image->getClientOriginalName();
+        if($image != null){
 
-        $image = Image::make($image->getRealPath());
+            $filename = $image->getClientOriginalName();
 
-        $image->crop(300, 300)->save(Storage::path('/public/image/').'employees/'.$filename, 80);
+            $image = Image::make($image->getRealPath());
 
-        // $image->move(Storage::path('/public/image/').'employees/',$filename);
+            $image->crop(300, 300)->save(Storage::path('/public/image/').'employees/'.$filename, 80);
 
-        $filename = Storage::url('image/employees/'.$filename);
+            $filename = Storage::url('image/employees/'.$filename);
+
+        }else{
+
+            $data = Employee::where('id', $id)->first();
+
+            $filename = $data->photo;
+
+        }
+
+        $date_start_works = date('Y-m-d',strtotime($request->date_start_works));
 
         Employee::where('id', $id)->update([
 
             'name'=> $request->name,
             'email' => $request->email,
             'amount_salary' => $request->amount_salary,
-            'photo' => $filename
+            'photo' => $filename,
+            'date_start_works' => $date_start_works,
 
         ]);
 
