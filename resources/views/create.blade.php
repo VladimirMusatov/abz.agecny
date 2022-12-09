@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | General Form Elements</title>
+  <title>Create employee</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -28,12 +28,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Show {{$employee->name}}</h1>
+            <h1>Create employee</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-              <li class="breadcrumb-item active">Edit Employee</li>
+              <li class="breadcrumb-item active">Create employee</li>
             </ol>
           </div>
         </div>
@@ -49,15 +49,11 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Show {{$employee->name}}</h3>
+                <h3 class="card-title">Create employee</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-
-              <div style="margin: 25px auto;">
-                <img style="width: 300px" src="{{$employee->photo}}">
-              </div>
-              <form method="POST" enctype="multipart/form-data" action="{{route('update',$employee->id)}}">
+              <form method="POST" enctype="multipart/form-data" action="{{route('store')}}">
                 @csrf
                 <div class="card-body">
                   @if ($errors->any())
@@ -72,16 +68,25 @@
                 @endif
                   <div class="form-group">
                     <label>Email address</label>
-                    <div class="form-control">{{$employee->email}}</div>
+                    <input type="text" class="form-control" name="email" id="exampleInputEmail1" placeholder="Email">
                   </div>
                   <div class="form-group">
                     <label>ПІБ</label>
-                    <div name="name" class="form-control">{{$employee->name}}</div>
+                    <input type="text" name="name" class="form-control" placeholder="ПІБ">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputFile">Фото</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" name="photo" class="custom-file-input" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      </div>
+                    </div>
                   </div>
                   <div class="form-group">
                     <label>Розмір заробітної плати</label>
                     <div class="input-group">
-                        <div class="form-control">{{$employee->amount_salary}}</div>
+                        <input type="text" class="form-control" name="amount_salary"  placeholder="Розмір заробітної плати">
                     </div>
                   </div>
                 <!-- Date mm/dd/yyyy -->
@@ -91,7 +96,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                     </div>
-                    <div class="form-control">{{Carbon\Carbon::createFromFormat('Y-m-d',$employee->date_start_works)->format('d.m.Y')}}</div>
+                    <input type="text" class="form-control" name="date_start_works" data-inputmask-alias="datetime" data-inputmask-inputformat="dd.mm.yyyy" data-mask>
                   </div>
                   <!-- /.input group -->
                 </div>
@@ -104,13 +109,17 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-phone"></i></span>
                     </div>
-                    <div class="form-control">{{$employee->phone}}</div>
+                    <input type="text" class="form-control" name="phone" data-inputmask='"mask": "+380 (99) 999 99 99"' data-mask>
                   </div>
                   <!-- /.input group -->
                 </div>
                 <!-- /.card-body -->
                 </div>
                 <!-- /.form group -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
               </form>
             </div>
             <!-- /.card -->

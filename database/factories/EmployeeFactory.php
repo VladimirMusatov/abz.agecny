@@ -20,15 +20,20 @@ class EmployeeFactory extends Factory
 
         Storage::makeDirectory('/public/image/users');
 
+        $amount_salary = rand(100, 500);
+
+        $amount_salary = $amount_salary. '.00';
+
         return [
             'name' => $this->faker->name,
             'job' => 'test',
             'date_start_works' => $this->faker->dateTime($max = 'now', $timezone = null),
             'phone' => $this->faker->phoneNumber,
             'email' => $this->faker->unique()->safeEmail(),
-            'amount_salary' => $this->faker->randomFloat(2, 100, 500),
-            'admin_updated_id' => $this->faker->randomDigit,
-            'admin_created_id' => $this->faker->randomDigit,
+            // 'amount_salary' => $this->faker->randomFloat(2, 100, 500),
+            'amount_salary' => $amount_salary,            
+            'admin_updated_id' => $this->faker->randomDigitNotNull,
+            'admin_created_id' => $this->faker->randomDigitNotNull,
             'photo' => fake()->imageUrl($width=400, $height=400), 
 
         ];

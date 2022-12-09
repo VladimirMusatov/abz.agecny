@@ -19,6 +19,8 @@ Route::get('/dashboard',[MainContoller::class, 'index'])->middleware(['auth' , '
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('/create',[MainContoller::class, 'create'])->name('create');
+    Route::post('/store',[MainContoller::class, 'store'])->name('store');
     Route::get('/show/{id}', [MainContoller::class, 'show'])->name("show");
     Route::get('/delete/{id}', [MainContoller::class, 'delete'])->name('delete');
     Route::get('/edit/{id}', [MainContoller::class, 'edit'])->name('edit');
