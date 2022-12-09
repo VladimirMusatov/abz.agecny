@@ -1,26 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | General Form Elements</title>
+@extends('layouts.main')
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-</head>
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
-  <!-- Navbar -->
-  @include('components.header')
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  @include('components.sidebar')
-
+@section('content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -87,10 +67,18 @@
                       </div>
                     </div>
                   </div>
+                <div class="form-group">
+                  <label>Посада</label>
+                  <select name="position_id" class="form-control select2bs4" style="width: 100%;">
+                    @foreach($positions as $position)
+                      <option @if($position->id == $employee->position->id) selected @endif value="{{$position->id}}">{{$position->name}}</option>
+                    @endforeach
+                  </select>
+                </div>
                   <div class="form-group">
                     <label>Розмір заробітної плати</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="amount_salary" value="{{$employee->amount_salary}}" placeholder="{{$employee->amount_salary}}">
+                        <input type="text" class="form-control" name="amount_salary" value="{{number_format($employee->amount_salary,'2', ',')}}" placeholder="{{$employee->amount_salary}}">
                     </div>
                   </div>
                 <!-- Date mm/dd/yyyy -->
@@ -181,5 +169,8 @@
 
   })
 </script>
-</body>
-</html>
+<script>
+  let item = document.getElementById('employees');
+  item.classList.add('active');
+</script>
+@endsection

@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -17,8 +16,6 @@ class EmployeeFactory extends Factory
      */
     public function definition()
     {
-
-        Storage::makeDirectory('/public/image/users');
 
         $amount_salary = rand(100, 500);
 

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
 use App\Models\Employee;
+use App\Models\Position;
 use Image;
 
 class MainContoller extends Controller
@@ -30,7 +31,9 @@ class MainContoller extends Controller
 
     public function create(){
 
-        return view('create');
+        $positions = Position::all();
+
+        return view('create', compact('positions'));
 
     }
 
@@ -62,7 +65,7 @@ class MainContoller extends Controller
         Employee::create([
 
             'name'=> $request->name,
-            'job' => 'test',
+            'position_id' => $request->position_id,
             'email' => $request->email,
             'amount_salary' => $request->amount_salary,
             'photo' => $filename,
@@ -82,7 +85,9 @@ class MainContoller extends Controller
 
         $employee = Employee::where('id', $id)->first();
 
-        return view('edit', compact('employee'));
+        $positions = Position::all();
+
+        return view('edit', ['employee' => $employee, 'positions' => $positions]);
 
     }
 
@@ -118,6 +123,8 @@ class MainContoller extends Controller
         }
 
         $date_start_works = date('Y-m-d',strtotime($request->date_start_works));
+
+        $admin_id = Auth::user()->id;
 
         Employee::where('id', $id)->update([
 

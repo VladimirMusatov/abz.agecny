@@ -56,7 +56,7 @@ class PositionsController extends Controller
 
         $request->validate([
 
-            'name' => 'required',
+            'name' => ['required', 'max:256'],
 
         ]);
 

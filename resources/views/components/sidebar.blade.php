@@ -36,7 +36,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="{{route('dashboard')}}" id="employees" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i style="margin-right: 5px; margin-left: 5px;" class="fa-solid fa-users"></i></i>
               <p>
                 Employees
               </p>
@@ -44,7 +44,7 @@
           </li>
           <li class="nav-item">
             <a href="{{route('positions-list')}}" id="positions" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i style="margin-right: 5px; margin-left: 5px;" class="fa-solid fa-circle-user"></i>
               <p>
                 Positions
               </p>
@@ -54,7 +54,7 @@
             <form id="form1" method="POST" action="{{route('logout')}}">
               @csrf
             <a href="javascript:;"  onclick="document.getElementById('form1').submit();" class="nav-link">
-              <i class="nav-icon fas fa-circle"></i>
+              <i style="margin-right: 5px; margin-left: 5px;" class="fa-solid fa-right-from-bracket"></i>
                 <p>
                   Exit
                 </p>
