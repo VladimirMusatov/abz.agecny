@@ -30,8 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/position-list',[PositionsController::class, 'index'])->name('positions-list');
     Route::get('/position-create', [PositionsController::class, 'create'])->name('positions-create');
     Route::post('/position-store', [PositionsController::class, 'store'])->name('positions-store');
-    Route::get('/position-edit',[PositionsController::class, 'edit'])->name('positions-edit');
-    Route::post('/position-update',[PositionsController::class, 'update'])->name('positions-update');
+    Route::get('/position-edit/{id}',[PositionsController::class, 'edit'])->name('positions-edit');
+    Route::post('/position-update/{id}',[PositionsController::class, 'update'])->name('positions-update');
     Route::get('positions-delete/{id}',[PositionsController::class, 'delete'])->name('positions-delete');
 
 });

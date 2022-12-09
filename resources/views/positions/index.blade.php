@@ -69,9 +69,9 @@
                     <tr>
                     <td>{{$position->name}}</td>
                     <td>
-<!--                       <a href="{{route('show', $position->id)}}"><ion-icon name="eye-outline"></ion-icon></a>
-                      <a href="{{route('edit', $position->id)}}"><ion-icon name="create-outline"></ion-icon></a>
-                      <a href="{{route('delete', $position->id)}}"><ion-icon name="trash-outline"></ion-icon></a> -->
+                      <!-- <a href="{{route('show', $position->id)}}"><ion-icon name="eye-outline"></ion-icon></a> -->
+                      <a href="{{route('positions-edit', $position->id)}}"><ion-icon name="create-outline"></ion-icon></a>
+                      <a href="{{route('positions-delete', $position->id)}}"><ion-icon name="trash-outline"></ion-icon></a>
                     </td>
                   </tr>
                  @endforeach

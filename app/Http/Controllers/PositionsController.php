@@ -44,15 +44,40 @@ class PositionsController extends Controller
 
     }
 
-    public function edit(){
+    public function edit($id){
+
+        $position = Position::where('id', $id)->first();
+
+        return view('positions.edit', compact('position'));
 
     }
 
-    public function update(){
+    public function update(Request $request, $id){
+
+        $request->validate([
+
+            'name' => 'required',
+
+        ]);
+
+        $admin_id = Auth::user()->id;
+
+        Position::where('id', $id)->update([
+
+            'name' => $request->name,
+            'admin_updated_id' => $admin_id,
+
+        ]);
+
+        return redirect()->route('positions-list')->with('message', 'Position updated successfully');
 
     }
 
-    public function delete(){
+    public function delete($id){
+
+        Position::where('id', $id)->delete();
+
+        return redirect()->back()->with('message', 'Position deleted successfully');
 
     }
 }
