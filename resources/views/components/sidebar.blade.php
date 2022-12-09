@@ -43,7 +43,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" id="positions" class="nav-link">
+            <a href="{{route('positions-list')}}" id="positions" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Positions

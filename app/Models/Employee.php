@@ -24,4 +24,9 @@ class Employee extends Model
         'admin_updated_id',
 
     ];
+
+    public function Position()
+    {
+        return $this->belongsTo(Position::class);
+    }
 }

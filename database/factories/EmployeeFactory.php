@@ -26,7 +26,7 @@ class EmployeeFactory extends Factory
 
         return [
             'name' => $this->faker->name,
-            'job' => 'test',
+            'position_id' => rand(1, 5),
             'date_start_works' => $this->faker->dateTime($max = 'now', $timezone = null),
             'phone' => $this->faker->phoneNumber,
             'email' => $this->faker->unique()->safeEmail(),

@@ -32,11 +32,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Employees</h1>
+            <h1>Positions</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="{{route('create')}}"  class="btn btn-block btn-default">Add employee</a>
+              <a href="{{route('positions-create')}}"  class="btn btn-block btn-default">Add position</a>
             </ol>
           </div>
         </div>
@@ -60,33 +60,18 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Фотографія</th>
-                    <th>ПІБ</th>
-                    <th>Посада</th>
-                    <th>Дата прийому на роботу</th>
-                    <th>Номер телефона</th>
-                    <th>Електронная пошта</th>
-                    <th>Розмір заробітної плати</th>
+                    <th>Назва посади</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                 @foreach($employees as $employee)
+                 @foreach($positions as $position)
                     <tr>
+                    <td>{{$position->name}}</td>
                     <td>
-                        <img style="width: 60px; height: 60px" src="{{$employee->photo}}">
-                    </td>
-                    <td><a href="{{route('show', $employee->id)}}">{{$employee->name}}</a></td>
-                    <td>{{$employee->position->name}}
-                    </td>
-                    <td>{{Carbon\Carbon::createFromFormat('Y-m-d',$employee->date_start_works)->format('d.m.Y')}}</td>
-                    <td>{{$employee->phone}}</td>
-                    <td>{{$employee->email}}</td>
-                    <td>${{number_format($employee->amount_salary,'2', ',')}}</td>
-                    <td>
-                      <a href="{{route('show', $employee->id)}}"><ion-icon name="eye-outline"></ion-icon></a>
-                      <a href="{{route('edit', $employee->id)}}"><ion-icon name="create-outline"></ion-icon></a>
-                      <a href="{{route('delete', $employee->id)}}"><ion-icon name="trash-outline"></ion-icon></a>
+<!--                       <a href="{{route('show', $position->id)}}"><ion-icon name="eye-outline"></ion-icon></a>
+                      <a href="{{route('edit', $position->id)}}"><ion-icon name="create-outline"></ion-icon></a>
+                      <a href="{{route('delete', $position->id)}}"><ion-icon name="trash-outline"></ion-icon></a> -->
                     </td>
                   </tr>
                  @endforeach
