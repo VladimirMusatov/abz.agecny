@@ -16,6 +16,7 @@ class Employee extends Model
         'name',
         'position_id', 
         'date_start_works',
+        'employer_id',
         'phone', 
         'email',
         'amount_salary', 
@@ -28,5 +29,10 @@ class Employee extends Model
     public function Position()
     {
         return $this->belongsTo(Position::class);
+    }
+
+    public function Employer()
+    {
+        return $this->belongsTo(Employee::class);
     }
 }

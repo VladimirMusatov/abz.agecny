@@ -66,6 +66,12 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label>Керівник</label>
+                    <div class="input-group">
+                        <div class="form-control">{{$employee->employer->name}}</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label>Розмір заробітної плати</label>
                     <div class="input-group">
                         <div class="form-control">{{number_format($employee->amount_salary,'2', ',')}}</div>

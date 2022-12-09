@@ -58,6 +58,14 @@
                     <label>ПІБ</label>
                     <input type="text" name="name" class="form-control" value="{{$employee->name}}" placeholder="{{$employee->name}}">
                   </div>
+                <div class="form-group">
+                  <label>Керівник</label>
+                  <select name="employer_id" class="form-control select2bs4" style="width: 100%;">
+                    @foreach($employees as $employer)
+                      <option @if($employee->employer_id == $employer->id) selected @endif value="{{$employer->id}}">{{$employer->name}}</option>
+                    @endforeach
+                  </select>
+                </div>
                   <div class="form-group">
                     <label for="exampleInputFile">Фото</label>
                     <div class="input-group">
@@ -78,7 +86,7 @@
                   <div class="form-group">
                     <label>Розмір заробітної плати</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="amount_salary" value="{{number_format($employee->amount_salary,'2', ',')}}" placeholder="{{$employee->amount_salary}}">
+                        <input type="text" class="form-control" name="amount_salary" value="{{number_format($employee->amount_salary,'2', '.')}}" placeholder="{{$employee->amount_salary}}">
                     </div>
                   </div>
                 <!-- Date mm/dd/yyyy -->
@@ -161,7 +169,13 @@
 <!-- Page specific script -->
 <script>
   $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
 
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
     //Datemask dd/mm/yyyy
     $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
     //Money Euro

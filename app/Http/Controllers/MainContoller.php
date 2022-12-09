@@ -85,9 +85,11 @@ class MainContoller extends Controller
 
         $employee = Employee::where('id', $id)->first();
 
+        $employees = Employee::all();
+
         $positions = Position::all();
 
-        return view('edit', ['employee' => $employee, 'positions' => $positions]);
+        return view('edit', ['employee' => $employee, 'positions' => $positions, 'employees' => $employees]);
 
     }
 
@@ -131,6 +133,7 @@ class MainContoller extends Controller
             'name'=> $request->name,
             'email' => $request->email,
             'amount_salary' => $request->amount_salary,
+            'employer_id' => $request->employer_id,
             'photo' => $filename,
             'phone' => $request->phone,
             'date_start_works' => $date_start_works,

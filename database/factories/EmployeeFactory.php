@@ -27,6 +27,7 @@ class EmployeeFactory extends Factory
             'date_start_works' => $this->faker->dateTime($max = 'now', $timezone = null),
             'phone' => $this->faker->phoneNumber,
             'email' => $this->faker->unique()->safeEmail(),
+            'employer_id' => rand(1, 5000),
             // 'amount_salary' => $this->faker->randomFloat(2, 100, 500),
             'amount_salary' => $amount_salary,            
             'admin_updated_id' => $this->faker->randomDigitNotNull,
