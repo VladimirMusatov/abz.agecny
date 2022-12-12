@@ -33,6 +33,7 @@ class EmployeeFactory extends Factory
             'admin_updated_id' => $this->faker->randomDigitNotNull,
             'admin_created_id' => $this->faker->randomDigitNotNull,
             'photo' => fake()->imageUrl($width=400, $height=400), 
+            'subordination_level' => rand(1, 5),
 
         ];
     }
