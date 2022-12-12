@@ -113,6 +113,44 @@
                   </div>
                   <!-- /.input group -->
                 </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>Created at</label>
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                    </div>
+                    <div type="text" class="form-control">{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$employee->created_at)->format('d.m.Y H:i:s')}}</div>
+                   </div>
+                  </div>
+                  <div class="col-sm-6">
+                   <label>Updated at</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div>
+                      <div type="text" class="form-control">{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$employee->updated_at)->format('d.m.Y H:i:s')}}</div>
+                    </div>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>Admin created ID</label>
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                    </div>
+                    <div type="text" class="form-control">{{$employee->admin_created_id}}</div>
+                   </div>
+                  </div>
+                  <div class="col-sm-6">
+                   <label>Admin updated ID</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div>
+                      <div type="text" class="form-control">{{$employee->admin_updated_id}}</div>
+                    </div>
+                  </div>
+                  <!-- /.input group -->
+                </div>
                 <!-- /.card-body -->
                 </div>
                 <!-- /.form group -->

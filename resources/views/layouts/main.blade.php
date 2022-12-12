@@ -20,6 +20,9 @@
   <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+    <!-- daterange picker -->
+  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   <script src="https://kit.fontawesome.com/452536f13f.js" crossorigin="anonymous"></script>
 </head>
 <body class="hold-transition sidebar-mini">

@@ -95,6 +95,7 @@ class MainContoller extends Controller
 
     public function update(Request $request,  $id){
 
+
         $request->validate([
 
             'name' => ['min:2','max:256','required'],
@@ -118,9 +119,7 @@ class MainContoller extends Controller
 
         }else{
 
-            $data = Employee::where('id', $id)->first();
-
-            $filename = $data->photo;
+            $filename = Employee::where('id', $id)->value('photo');
 
         }
 
@@ -132,6 +131,7 @@ class MainContoller extends Controller
 
             'name'=> $request->name,
             'email' => $request->email,
+            'position_id' => $request->position_id,
             'amount_salary' => $request->amount_salary,
             'employer_id' => $request->employer_id,
             'photo' => $filename,
