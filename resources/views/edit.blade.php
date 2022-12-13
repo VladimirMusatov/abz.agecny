@@ -60,11 +60,17 @@
                   </div>
                 <div class="form-group">
                   <label>Керівник</label>
-                  <select name="employer_id" class="form-control select2bs4" style="width: 100%;">
+                  @if($employee->subordination_level == 1)
+                    <div class="form-group">
+                        <div class="form-control">У цього співробітника найвища посада. Він не може мати керівника.</div>
+                    </div>
+                  @else
+                    <select name="employer_id" class="form-control select2bs4" style="width: 100%;">
                     @foreach($employees as $employer)
                       <option @if($employee->employer_id == $employer->id) selected @endif value="{{$employer->id}}">{{$employer->name}}</option>
                     @endforeach
                   </select>
+                  @endif
                 </div>
                   <div class="form-group">
                     <label for="exampleInputFile">Фото</label>
@@ -119,7 +125,7 @@
                     <div class="input-group">
                     <div class="input-group-prepend">
                     </div>
-                    <div type="text" class="form-control">{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$employee->created_at)->format('d.m.Y H:i:s')}}</div>
+                    <div>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$employee->created_at)->format('d.m.Y H:i:s')}}</div>
                    </div>
                   </div>
                   <div class="col-sm-6">
@@ -127,7 +133,7 @@
                     <div class="input-group">
                       <div class="input-group-prepend">
                       </div>
-                      <div type="text" class="form-control">{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$employee->updated_at)->format('d.m.Y H:i:s')}}</div>
+                      <div>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$employee->updated_at)->format('d.m.Y H:i:s')}}</div>
                     </div>
                   </div>
                   <!-- /.input group -->
@@ -138,7 +144,7 @@
                     <div class="input-group">
                     <div class="input-group-prepend">
                     </div>
-                    <div type="text" class="form-control">{{$employee->admin_created_id}}</div>
+                    <div >{{$employee->admin_created_id}}</div>
                    </div>
                   </div>
                   <div class="col-sm-6">
@@ -146,7 +152,7 @@
                     <div class="input-group">
                       <div class="input-group-prepend">
                       </div>
-                      <div type="text" class="form-control">{{$employee->admin_updated_id}}</div>
+                      <div >{{$employee->admin_updated_id}}</div>
                     </div>
                   </div>
                   <!-- /.input group -->

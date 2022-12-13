@@ -67,9 +67,15 @@
                   </div>
                   <div class="form-group">
                     <label>Керівник</label>
+                    @if($employee->subordination_level == 1)
+                      <div class="form-group">
+                        <div class="form-control">У цього співробітника найвища посада. Він не може мати керівника.</div>
+                    </div>
+                    @else 
                     <div class="input-group">
                         <div class="form-control">{{$employee->employer->name}}</div>
                     </div>
+                    @endif
                   </div>
                   <div class="form-group">
                     <label>Розмір заробітної плати</label>
@@ -92,14 +98,51 @@
                 <!-- phone mask -->
                 <div class="form-group">
                   <label>Номер телефону</label>
-
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-phone"></i></span>
                     </div>
                     <div class="form-control">{{$employee->phone}}</div>
                   </div>
+                </div>
                   <!-- /.input group -->
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>Created at</label>
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                    </div>
+                    <div>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$employee->created_at)->format('d.m.Y H:i:s')}}</div>
+                   </div>
+                  </div>
+                  <div class="col-sm-6">
+                   <label>Updated at</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div>
+                      <div">{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$employee->updated_at)->format('d.m.Y H:i:s')}}</div>
+                    </div>
+                  </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>Admin created ID</label>
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                    </div>
+                    <div>{{$employee->admin_created_id}}</div>
+                   </div>
+                  </div>
+                  <div class="col-sm-6">
+                   <label>Admin updated ID</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div>
+                      <div>{{$employee->admin_updated_id}}</div>
+                    </div>
+                  </div>
+                  <!-- /.input group -->
+                </div>
                 </div>
                 <!-- /.card-body -->
                 </div>

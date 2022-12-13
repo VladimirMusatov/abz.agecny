@@ -50,6 +50,44 @@
                     <label>Назва посади</label>
                     <input type="text" value="{{$position->name}}" class="form-control" name="name">
                   </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>Created at</label>
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                    </div>
+                    <div>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$position->created_at)->format('d.m.Y H:i:s')}}</div>
+                   </div>
+                  </div>
+                  <div class="col-sm-6">
+                   <label>Updated at</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div>
+                      <div>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$position->updated_at)->format('d.m.Y H:i:s')}}</div>
+                    </div>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>Admin created ID</label>
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                    </div>
+                    <div >{{$position->admin_created_id}}</div>
+                   </div>
+                  </div>
+                  <div class="col-sm-6">
+                   <label>Admin updated ID</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      </div>
+                      <div>{{$position->admin_updated_id}}</div>
+                    </div>
+                  </div>
+                  <!-- /.input group -->
+                </div>
 
 
                 <!-- /.card-body -->

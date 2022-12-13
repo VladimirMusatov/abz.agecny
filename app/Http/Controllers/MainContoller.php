@@ -83,9 +83,12 @@ class MainContoller extends Controller
 
     public function edit($id){
 
+
         $employee = Employee::where('id', $id)->first();
 
-        $employees = Employee::all();
+        $subordination_level = $employee->id;
+
+        $employees = Employee::where('subordination_level', $subordination_level - 1)->get();
 
         $positions = Position::all();
 
@@ -146,6 +149,27 @@ class MainContoller extends Controller
     }
 
     public function delete($id){
+
+        //Найти id работников у которых будем удолять начальника
+        $employees = Employee::where('employer_id', $id)->get();
+
+        //Получаем уровень начальника в иерархии
+        $subordination_level = Employee::where('id', $id)->value('subordination_level');
+
+        foreach($employees as $employee){
+
+            //найти id рандомного начальника того-же уровня
+            $new_employer_id = Employee::where('subordination_level', $subordination_level)->inRandomOrder()->value('id');
+
+            //Обновить подчененого
+            Employee::where('id', $employee->id)->update([
+
+                'employer_id' => $new_employer_id,
+
+            ]);
+ 
+
+        }
 
         Employee::where('id', $id)->delete();
 

@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function(){
+
+    return redirect()->route('dashboard');
+
+});
+
 Route::get('/dashboard',[MainContoller::class, 'index'])->middleware(['auth' , 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
