@@ -33,7 +33,9 @@ class MainContoller extends Controller
 
         $positions = Position::all();
 
-        return view('create', compact('positions'));
+        $employees = Employee::whereNot('subordination_level', 5)->get();
+
+        return view('create',['positions' => $positions, 'employees'=> $employees ]);
 
     }
 
@@ -44,9 +46,26 @@ class MainContoller extends Controller
             'name' => ['min:2','max:256','required'],
             'email' => ['email','required'],
             'amount_salary' => ['numeric','min:0','max:500'],
+            'image' => ['image'],
             'photo' => ['file', 'max:5000', 'image','dimensions:min_width=300,min_height=300'],
+            'phone' => ['phone:UA'],
 
         ]);
+
+        //Получение уровня иерархии начльника
+        $employer_level = Employee::where('id', $request->employer_id)->value('subordination_level');
+
+
+        //Если уровень начальника = 5 тогда создаваемый пользователь становиться того же уровня, поскольку не может быть подчененого 6 уровня
+        if($employer_level == 5){
+
+            $subordination_level = 5;
+
+        }else{
+
+            $subordination_level = $employer_level + 1;
+
+        }
 
         $image = $request->photo;
 
@@ -71,6 +90,7 @@ class MainContoller extends Controller
             'photo' => $filename,
             'phone' => $request->phone,
             'date_start_works' => $date_start_works,
+            'subordination_level' => $subordination_level,
             'admin_created_id' => $admin_id,
             'admin_updated_id' => $admin_id,
 
@@ -105,6 +125,7 @@ class MainContoller extends Controller
             'email' => ['email','required',Rule::unique('employees')->ignore($id),],
             'amount_salary' => ['numeric','min:0','max:500'],
             'photo' => ['file', 'max:5000', 'image','dimensions:min_width=300,min_height=300'],
+            'phone' => ['phone:UA'],
 
         ]);
 

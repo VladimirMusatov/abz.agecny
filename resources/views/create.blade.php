@@ -48,12 +48,20 @@
                 @endif
                   <div class="form-group">
                     <label>Email address</label>
-                    <input type="text" class="form-control" name="email" id="exampleInputEmail1" placeholder="Email">
+                    <input type="text" value="{{ old('email')}}" class="form-control" name="email" id="exampleInputEmail1" placeholder="Email">
                   </div>
                   <div class="form-group">
                     <label>ПІБ</label>
-                    <input type="text" name="name" class="form-control" placeholder="ПІБ">
+                    <input type="text" value="{{ old('name')}}" name="name" class="form-control" placeholder="ПІБ">
                   </div>
+                <div class="form-group">
+                  <label>Керівник</label>
+                    <select name="employer_id" class="form-control select2bs4" style="width: 100%;">
+                    @foreach($employees as $employer)
+                      <option value="{{$employer->id}}">{{$employer->name}}</option>
+                    @endforeach
+                  </select>
+                </div>
                 <div class="form-group">
                   <label>Посада</label>
                   <select name="position_id" class="form-control select2bs4" style="width: 100%;">
@@ -74,7 +82,7 @@
                   <div class="form-group">
                     <label>Розмір заробітної плати</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="amount_salary"  placeholder="Розмір заробітної плати">
+                        <input type="text" value="{{ old('amount_salary')}}" class="form-control" name="amount_salary"  placeholder="Розмір заробітної плати">
                     </div>
                   </div>
                 <!-- Date mm/dd/yyyy -->
@@ -84,7 +92,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                     </div>
-                    <input type="text" class="form-control" name="date_start_works" data-inputmask-alias="datetime" data-inputmask-inputformat="dd.mm.yyyy" data-mask>
+                    <input type="text" class="form-control" value="{{ old('date_start_works')}}" name="date_start_works" data-inputmask-alias="datetime" data-inputmask-inputformat="dd.mm.yyyy" data-mask>
                   </div>
                   <!-- /.input group -->
                 </div>
@@ -97,7 +105,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-phone"></i></span>
                     </div>
-                    <input type="text" class="form-control" name="phone" data-inputmask='"mask": "+380 (99) 999 99 99"' data-mask>
+                    <input type="text" class="form-control" value="{{ old('phone')}}"  name="phone" data-inputmask='"mask": "+380 (99) 999 99 99"' data-mask>
                   </div>
                   <!-- /.input group -->
                 </div>
@@ -157,6 +165,13 @@
 <!-- Page specific script -->
 <script>
   $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
 
     //Datemask dd/mm/yyyy
     $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
