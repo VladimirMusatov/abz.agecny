@@ -26,7 +26,7 @@ class PositionsController extends Controller
 
         $request->validate([
 
-            'name' => 'required',
+            'name' => ['required', 'max:256'],
 
         ]);
 
@@ -66,6 +66,7 @@ class PositionsController extends Controller
 
             'name' => $request->name,
             'admin_updated_id' => $admin_id,
+            
 
         ]);
 
